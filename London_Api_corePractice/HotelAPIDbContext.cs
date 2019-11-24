@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using London_Api_corePractice.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,9 @@ namespace London_Api_corePractice
 
         }
 
+        public DbSet<RoomEntity> Rooms
+        {
+            get; set;
+        }
     }
 }
