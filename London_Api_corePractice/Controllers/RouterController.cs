@@ -19,7 +19,8 @@ namespace London_Api_corePractice.Controllers
             var respose = new
             {
                 href = Url.Link(nameof(GetRout), null),
-                rooms = Url.Link(nameof(RoomController.GetRooms), null)
+                rooms = Url.Link(nameof(RoomController.GetRooms), null),
+                info=Url.Link(nameof(InfoController.GetInfo),null)
             };
 
             return Ok(respose);

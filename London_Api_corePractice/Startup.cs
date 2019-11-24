@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using London_Api_corePractice.Filters;
+using London_Api_corePractice.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace London_Api_corePractice
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.Configure<HotelInfo>(Configuration.GetSection("Info"));
             services.AddMvc(options=> {
                 options.Filters.Add<JsonExceptionFilter>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -54,6 +56,18 @@ namespace London_Api_corePractice
             });
 
             #endregion
+
+
+            #region Secure APIs
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowUSers", policy =>
+                {
+                    policy.AllowAnyOrigin();
+
+                });
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +85,9 @@ namespace London_Api_corePractice
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+
+            app.UseCors("AllowUSers");
             app.UseMvc();
         }
     }
