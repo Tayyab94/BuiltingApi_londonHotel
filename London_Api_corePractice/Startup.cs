@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using London_Api_corePractice.Filters;
+using London_Api_corePractice.InfraStructure;
 using London_Api_corePractice.Models;
+using London_Api_corePractice.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +42,8 @@ namespace London_Api_corePractice
             {
                 options.UseInMemoryDatabase("londondb");
             });
+
+            services.AddScoped<IRoomServices, RoomSerives>();
 
 
             services.AddMvc(options=> {
@@ -79,6 +84,9 @@ namespace London_Api_corePractice
                 });
             });
             #endregion
+
+            //services.AddAutoMapper(
+            //    options => options.AddProfile<MappingProfile>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
