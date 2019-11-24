@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,16 @@ namespace London_Api_corePractice
         {
 
             services.Configure<HotelInfo>(Configuration.GetSection("Info"));
+
+            //use In-Memory data Base for Quick Developing 
+
+            //TODO swap for real database.. latter..
+            services.AddDbContext<HotelAPIDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("londondb");
+            });
+
+
             services.AddMvc(options=> {
                 options.Filters.Add<JsonExceptionFilter>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
