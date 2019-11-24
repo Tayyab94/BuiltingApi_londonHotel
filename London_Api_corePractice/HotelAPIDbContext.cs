@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace London_Api_corePractice
 {
-    public class HotelAPIDbContext :DbContext
+    public class HotelAPIDbContext : DbContext
     {
-        public HotelAPIDbContext(DbContextOptions options):base(options)
+        public HotelAPIDbContext(DbContextOptions options) : base(options)
         {
 
         }
 
-        public DbSet<RoomEntity> Rooms { get; set;
-        }
     }
 }
